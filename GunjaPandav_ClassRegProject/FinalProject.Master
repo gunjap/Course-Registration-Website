@@ -33,7 +33,7 @@
         .auto-style1 {
             font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
             font-size: 16px;
-            text-align: left;
+            text-align: center;
         }
 
         .auto-style2 {
@@ -76,7 +76,7 @@
             background-color: antiquewhite;
             padding: 0px;
             width: 50%;
-            height: 500px;
+            height: 700px;
             text-align: center;
             margin: 0 auto;
         }
@@ -92,44 +92,78 @@
             font-size: 16px;
             border-radius: 15px;
         }
+        .register {
+            background-color: burlywood;
+            border: none;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 15px;
+        }
         .floating-box {
             float: left;
             width: 240px;
             height: 200px;
             margin: 10px;
             font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            font-size:large;
             border-radius: 15px;
             background-color: bisque;
-        }
+            display: flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+           }
+         .floating-classes {
+            float: left;
+            width: 240px;
+            height: 200px;
+            margin: 10px;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            font-size:x-large;
+            border-radius: 15px;
+            background-color: bisque;
+            display: flex;
+            /*align-items: center;
+            justify-content: center;*/
+           }
+
     </style>
     <script type="text/javascript">
-       $(document).ready(function () {
+        $(document).ready(function () {
 
-           $('#form1').validate({ // initialize the plugin
-               rules: {
-                   nameTextBox: {
-                       required: true
-                   },
-                   loginTextBox: {
-                       required: true,
-                       minlength: 5
-                   },
-                   emailTextBox: {
-                       required: true,
-                       email: true
-                   }
-               },
-               errorPlacement: function(error, element) {
-                       error.insertBefore(element);
-               },
-              
-               submitHandler: function (form) { // for demo
-                   alert('valid form submitted'); // for demo
-                   return false; // for demo
-               }
-           });
+            //$('#form1').validate({ // initialize the plugin
+            //    rules: {
+            //        ctl00$ContentPlaceHolder1$nameTextBox: {
+            //            required: true
+            //        },
+            //        ctl00$ContentPlaceHolder1$loginTextBox: {
+            //            required: true,
+            //            minlength: 5
+            //        },
+            //        ctl00$ContentPlaceHolder1$emailTextBox: {
+            //            required: true,
+            //            email: true
+            //        }
 
-       });
+            //    },
+
+            //    errorPlacement: function (error, element) {
+            //        error.insertBefore(element);
+            //    },
+
+            //    submitHandler: function (form) {
+
+            //        alert('valid form submitted');
+
+            //        return false;
+            //    }
+
+            //});
+            
+        });
     </script>
 </head>
 <body>
