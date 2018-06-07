@@ -146,7 +146,7 @@ public class ClassReg
         return intStudentID;
     }
 
-    public List<String> ListMyClasses(int StudentID)
+    public Dictionary<string, List<String>> ListMyClasses(int StudentID)
     {
         //Get my configured connection
         System.Data.SqlClient.SqlConnection objCon = GetConnection();
@@ -167,7 +167,7 @@ public class ClassReg
         objStudentID.Value = StudentID;
         objCmd.Parameters.Add(objStudentID);
 
-        List<String> ClassList = new List<string>();
+         Dictionary<string, List<String>> ClassList = new Dictionary<string, List<String>>();
 
         try
         {
@@ -178,7 +178,11 @@ public class ClassReg
             {
                 while (reader.Read())
                 {
-                    ClassList.Add(reader["ClassName"].ToString());
+                    List<string> classAttributes = new List<string>();
+                    classAttributes.Add(reader["ClassName"].ToString());
+                    classAttributes.Add(reader["ClassDate"].ToString());
+                    classAttributes.Add(reader["ClassDescription"].ToString());
+                    ClassList.Add(reader["ClassId"].ToString(), classAttributes);
                 }
             }
         }
@@ -229,7 +233,7 @@ public class ClassReg
         return Classes;
     }
 
-    public int RequestLogin(string name, string email, string reason, string login, DateTime requireby, string NR)
+    public int RequestLogin(string name, string email, string reason, string login, string NR, DateTime? requireby=null)
     {
         //Get my configured connection
         System.Data.SqlClient.SqlConnection objCon = GetConnection();
@@ -294,13 +298,26 @@ public class ClassReg
         objreason.Direction = System.Data.ParameterDirection.Input;
         objCmd.Parameters.Add(objreason);
 
-        System.Data.SqlClient.SqlParameter objreqdate;
-        objreqdate = new System.Data.SqlClient.SqlParameter();
-        objreqdate.ParameterName = "@DateRequiredBy";
-        objreqdate.SqlDbType = System.Data.SqlDbType.DateTime;
-        objreqdate.Value = requireby;
-        objreqdate.Direction = System.Data.ParameterDirection.Input;
-        objCmd.Parameters.Add(objreqdate);
+        if (requireby == null)
+        {
+            System.Data.SqlClient.SqlParameter objreqdate;
+            objreqdate = new System.Data.SqlClient.SqlParameter();
+            objreqdate.ParameterName = "@DateRequiredBy";
+            objreqdate.SqlDbType = System.Data.SqlDbType.DateTime;
+            objreqdate.Value = DBNull.Value;
+            objreqdate.Direction = System.Data.ParameterDirection.Input;
+            objCmd.Parameters.Add(objreqdate);
+        }
+        else
+        {
+            System.Data.SqlClient.SqlParameter objreqdate;
+            objreqdate = new System.Data.SqlClient.SqlParameter();
+            objreqdate.ParameterName = "@DateRequiredBy";
+            objreqdate.SqlDbType = System.Data.SqlDbType.DateTime;
+            objreqdate.Value = requireby;
+            objreqdate.Direction = System.Data.ParameterDirection.Input;
+            objCmd.Parameters.Add(objreqdate);
+        }
 
         System.Data.SqlClient.SqlParameter objLoginID;
         objLoginID = new System.Data.SqlClient.SqlParameter();
